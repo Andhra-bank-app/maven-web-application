@@ -61,5 +61,5 @@ buildStatus = buildStatus ?:'SUCCESS'
 
   // Send notifications
   slackSend (color: colorCode, message: summary)
-}
+
 
