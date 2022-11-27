@@ -1,0 +1,33 @@
+node{ 
+
+def mavenHome = tool name:'maven3.8.5'
+echo "The jobname is:${env.JOB_NAME}"
+echo "The build number is:${env.BUILD_NUMBER}"
+
+//checkout code stage
+stage('Checkout code'){
+git branch: 'development', credentialsId: 'b66e69de-3c41-4190-add7-c94d7d73d94b', url: 'https://github.com/Andhra-bank-app/maven-web-application.git'
+}
+
+//Build stage
+stage('build'){
+sh "${mavenHome}/bin/mvn clean package"
+}
+/*
+//execute sonarqube report
+stage('execute sonarqube report'){
+sh "${mavenHome}/bin/mvn sonar:sonar"
+}
+//upload artifacts into nexus repo
+stage('upload to nexus'){
+sh "${mavenHome}/bin/mvn deploy"
+}
+//deployed into Tomcat server
+stage('deploy the application'){
+sshagent(['de68ff7e-02c6-4520-94b4-8481140a8202']) {
+   sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.32.72:/opt/apache-tomcat-9.0.68/webapps/"
+}
+
+}
+*/
+}
