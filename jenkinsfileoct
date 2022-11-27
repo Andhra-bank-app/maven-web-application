@@ -38,7 +38,7 @@ currentBuild.result="FAILURE"
 finally{
 sendSlackNotifications(currentBuild.result)
 }
-}
+
 //function for slack notification
 def sendSlackNotifications(String buildStatus= 'STARTED'){
 buildStatus = buildStatus ?:'SUCCESS'
@@ -63,6 +63,6 @@ buildStatus = buildStatus ?:'SUCCESS'
 
   // Send notifications
   slackSend (color: colorCode, message: summary)
-  
+  }
 
 
