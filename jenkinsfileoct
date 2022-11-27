@@ -6,7 +6,7 @@ echo "The build number is:${env.BUILD_NUMBER}"
 properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([pollSCM('* * * * *')])])
 //checkout code stage
 stage('Checkout code'){
-sendSlackNotifications= 'STARTED'
+sendSlackNotifications("STARTED")
 git branch: 'development', credentialsId: 'b66e69de-3c41-4190-add7-c94d7d73d94b', url: 'https://github.com/Andhra-bank-app/maven-web-application.git'
 }
 
@@ -62,4 +62,4 @@ buildStatus = buildStatus ?:'SUCCESS'
   // Send notifications
   slackSend (color: colorCode, message: summary)
 }
-}
+
